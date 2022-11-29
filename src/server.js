@@ -30,7 +30,7 @@ const dbSelfCheck = async () => {
     console.log("MySQL connection error", e);
   }
 };
-// dbSelfCheck();      " TO CONFIGURE DB WHILE USING "
+dbSelfCheck();   
 
 // Healthcheck routes
 app.get("/ping", (req, res) => {
