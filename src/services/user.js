@@ -22,8 +22,22 @@ const createUser = async (params) => {
   return response;
 };
 
+const getUsers = async (params) => {
+  let userModelParams = {};
+  params.userId ? (userModelParams.userId = params.userId) : null;
+  params.email ? (userModelParams.email = params.email) : null;
+  params.name ? (userModelParams.name = params.name) : null;
 
+  const userDetails = await userModel.getUsers(userModelParams);
+
+  let response = status.getStatus("success");
+  response.data = {};
+  response.data.userDetails = userDetails;
+
+  return response;
+};
 
 module.exports = {
-  createUser: wrapperService.wrap(createUser), 
+  createUser: wrapperService.wrap(createUser),
+  getUsers: wrapperService.wrap(getUsers),
 };
