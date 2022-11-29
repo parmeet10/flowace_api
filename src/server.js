@@ -6,7 +6,7 @@ app.use(express.json());
 const port = 3000 || process.env.PORT;
 
 // Include routes
-
+const userRoutes = require("./routes/user");
 // Include config files
 const status = require("./configs/status");
 
@@ -30,7 +30,7 @@ const dbSelfCheck = async () => {
     console.log("MySQL connection error", e);
   }
 };
-dbSelfCheck();   
+dbSelfCheck();
 
 // Healthcheck routes
 app.get("/ping", (req, res) => {
@@ -41,6 +41,7 @@ app.get("/ping", (req, res) => {
 app.use(middleware);
 
 // // Routes
+app.use("/user", userRoutes);
 
 // Catch 404s
 app.use((req, res, next) => {

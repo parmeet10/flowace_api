@@ -41,6 +41,27 @@ const getStatus = (code) => {
         message: "Authorisation failed.",
       };
       break;
+    case "invalid_email":
+      status = {
+        code: code,
+        error: true,
+        message: "email is invalid",
+      };
+      break;
+    case "invalid_name":
+      status = {
+        code: code,
+        error: true,
+        message: "name is invalid",
+      };
+      break;
+    case "invalid_password":
+      status = {
+        code: code,
+        error: true,
+        message: "password is invalid",
+      };
+      break;
     case "invalid_token":
       status = {
         code: code,
