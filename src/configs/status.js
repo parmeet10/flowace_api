@@ -84,6 +84,13 @@ const getStatus = (code) => {
         message: "Invalid Date",
       };
       break;
+    case "self_overlap":
+      status = {
+        code: code,
+        error: true,
+        message: "user trying to overlap his own schedule",
+      };
+      break;
 
     case "generic_fail":
     default:

@@ -7,6 +7,8 @@ const port = 3000 || process.env.PORT;
 
 // Include routes
 const userRoutes = require("./routes/user");
+const scheduleRoutes = require("./routes/schedule");
+
 // Include config files
 const status = require("./configs/status");
 
@@ -18,6 +20,7 @@ const isDeveloping = process.env.NODE_ENV === "development";
 
 //include middleware
 const middleware = require("./middleware/auths");
+const schedule = require("./controllers/schedule");
 
 // Make DB connections
 const dbSelfCheck = async () => {
@@ -42,6 +45,7 @@ app.use(middleware);
 
 // // Routes
 app.use("/user", userRoutes);
+app.use("/schedule", scheduleRoutes);
 
 // Catch 404s
 app.use((req, res, next) => {
