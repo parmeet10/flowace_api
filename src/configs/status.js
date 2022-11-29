@@ -25,6 +25,13 @@ const getStatus = (code) => {
         message: "Mandatory inputs missing.",
       };
       break;
+    case "user_duplicate":
+      status = {
+        code: code,
+        error: true,
+        message: "user already existing. Try using new Email-Id",
+      };
+      break;
 
     case "headers_missing":
       status = {
@@ -39,6 +46,27 @@ const getStatus = (code) => {
         code: code,
         error: true,
         message: "Authorisation failed.",
+      };
+      break;
+    case "invalid_email":
+      status = {
+        code: code,
+        error: true,
+        message: "email is invalid",
+      };
+      break;
+    case "invalid_name":
+      status = {
+        code: code,
+        error: true,
+        message: "name is invalid",
+      };
+      break;
+    case "invalid_password":
+      status = {
+        code: code,
+        error: true,
+        message: "password is invalid",
       };
       break;
     case "invalid_token":
