@@ -25,6 +25,13 @@ const getStatus = (code) => {
         message: "Mandatory inputs missing.",
       };
       break;
+    case "user_duplicate":
+      status = {
+        code: code,
+        error: true,
+        message: "user already existing. Try using new Email-Id",
+      };
+      break;
 
     case "headers_missing":
       status = {

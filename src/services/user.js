@@ -8,6 +8,14 @@ const createUser = async (params) => {
     throw new Error("input_missing");
   }
 
+  let getUserParams = {};
+  getUserParams.email = params.email;
+
+  const userData = await getUsers(getUserParams);
+  if (userData.data.userDetails && userData.data.userDetails.length > 0) {
+    throw new Error("user_duplicate");
+  }
+
   let userModelParams = {};
   userModelParams.name = params.name;
   userModelParams.password = params.password;
