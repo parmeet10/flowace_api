@@ -51,7 +51,7 @@ const getSchedules = async (params) => {
 
   return _translateToJson(schedules);
 };
-
+// not in use(hold)
 const updateSchedule = async (params) => {
   if (!params.scheduleId) {
     throw new Error("input_missing");
@@ -107,7 +107,6 @@ const cronScheduleUpdate = async () => {
   await updateScheduleQuery;
 };
 setInterval(cronScheduleUpdate, 300000);
-
 
 module.exports = {
   createSchedule: wrapperService.wrap(createSchedule),
