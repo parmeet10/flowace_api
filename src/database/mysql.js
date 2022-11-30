@@ -1,10 +1,10 @@
 const Knex = require("knex");
 
 const mysqlConnectionString = {
-  host: "",
-  user: "", 
-  password: "", 
-  database: "",
+  host: "flowacedatabase.ckhscy7lmrx2.ap-south-1.rds.amazonaws.com",
+  user: "root",
+  password: "rootqwertyuiop",
+  database: "flowacedatabase",
   port: 3306,
 };
 

@@ -6,6 +6,8 @@ app.use(express.json());
 const port = 3000 || process.env.PORT;
 
 // Include routes
+const userRoutes = require("./routes/user");
+const scheduleRoutes = require("./routes/schedule");
 
 // Include config files
 const status = require("./configs/status");
@@ -18,6 +20,7 @@ const isDeveloping = process.env.NODE_ENV === "development";
 
 //include middleware
 const middleware = require("./middleware/auths");
+const schedule = require("./controllers/schedule");
 
 // Make DB connections
 const dbSelfCheck = async () => {
@@ -30,7 +33,7 @@ const dbSelfCheck = async () => {
     console.log("MySQL connection error", e);
   }
 };
-// dbSelfCheck();      " TO CONFIGURE DB WHILE USING "
+dbSelfCheck();
 
 // Healthcheck routes
 app.get("/ping", (req, res) => {
@@ -41,6 +44,8 @@ app.get("/ping", (req, res) => {
 app.use(middleware);
 
 // // Routes
+app.use("/user", userRoutes);
+app.use("/schedule", scheduleRoutes);
 
 // Catch 404s
 app.use((req, res, next) => {

@@ -25,6 +25,13 @@ const getStatus = (code) => {
         message: "Mandatory inputs missing.",
       };
       break;
+    case "user_duplicate":
+      status = {
+        code: code,
+        error: true,
+        message: "user already existing. Try using new Email-Id",
+      };
+      break;
 
     case "headers_missing":
       status = {
@@ -41,6 +48,27 @@ const getStatus = (code) => {
         message: "Authorisation failed.",
       };
       break;
+    case "invalid_email":
+      status = {
+        code: code,
+        error: true,
+        message: "email is invalid",
+      };
+      break;
+    case "invalid_name":
+      status = {
+        code: code,
+        error: true,
+        message: "name is invalid",
+      };
+      break;
+    case "invalid_password":
+      status = {
+        code: code,
+        error: true,
+        message: "password is invalid",
+      };
+      break;
     case "invalid_token":
       status = {
         code: code,
@@ -54,6 +82,29 @@ const getStatus = (code) => {
         code: code,
         error: true,
         message: "Invalid Date",
+      };
+      break;
+    case "self_overlap":
+      status = {
+        code: code,
+        error: true,
+        message: "user trying to overlap his own schedule",
+      };
+      break;
+    case "schedule_inbound":
+      status = {
+        code: code,
+        error: true,
+        message:
+          "user trying to schedule an event inside another event. Try new time setting",
+      };
+      break;
+    case "unable_to_process":
+      status = {
+        code: code,
+        error: true,
+        message:
+          "Too many schedules aligned during this period. Try some new time",
       };
       break;
 
