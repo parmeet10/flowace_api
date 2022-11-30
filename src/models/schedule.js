@@ -47,7 +47,6 @@ const getSchedules = async (params) => {
     ? getSchedulesQuery.where("s.active", params.active)
     : null;
 
-  console.log(getSchedulesQuery.toString());
   const schedules = await getSchedulesQuery;
 
   return _translateToJson(schedules);
@@ -95,6 +94,21 @@ const _translateToJson = (schedules) => {
 
   return result;
 };
+
+//  CRON FUNCTION TO DELETE OUT-DATED RECORDS
+const cronScheduleUpdate = async () => {
+  let _update = {};
+  _update["active"] = 0;
+
+  let updateScheduleQuery = database
+    .knex("sport_schedules")
+    .update(_update)
+    .where("end", "<", new Date().toISOString());
+  await updateScheduleQuery;
+};
+setInterval(cronScheduleUpdate, 300000);
+
+
 module.exports = {
   createSchedule: wrapperService.wrap(createSchedule),
   getSchedules: wrapperService.wrap(getSchedules),

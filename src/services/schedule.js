@@ -32,6 +32,15 @@ const createSchedule = async (params) => {
   }
 
   console.log(schedules.data.schedules);
+  console.log(params);
+  if (
+    params.start >= schedules.data.schedules[0].start &&
+    params.start <= schedules.data.schedules[0].end &&
+    params.end >= schedules.data.schedules[0].start &&
+    params.end <= schedules.data.schedules[0].end
+  ) {
+    throw new Error("");
+  }
 
   let createScheduleParams = {};
   createScheduleParams.userId = params.userId;
@@ -46,6 +55,7 @@ const createSchedule = async (params) => {
 
 const getSchedules = async (params) => {
   let scheduleModelParams = {};
+  scheduleModelParams.active = 1;
   params.start
     ? (scheduleModelParams.start = new Date(params.start).toISOString())
     : null;
@@ -56,25 +66,9 @@ const getSchedules = async (params) => {
 
   const schedules = await scheduleModel.getSchedules(scheduleModelParams);
 
-  schedules.forEach(async (schedule) => {
-    if (schedule.end < new Date()) {
-      let updateScheduleParams = {};
-      updateScheduleParams.active = 0;
-      updateScheduleParams.scheduleId = schedule.id;
-
-      await updateSchedule(updateScheduleParams);
-    }
-  });
-
-  scheduleModelParams.active = 1;
-
-  const verfiedSchedules = await scheduleModel.getSchedules(
-    scheduleModelParams
-  );
-
   let response = status.getStatus("success");
   response.data = {};
-  response.data.schedules = verfiedSchedules;
+  response.data.schedules = schedules;
 
   return response;
 };
