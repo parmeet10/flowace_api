@@ -65,7 +65,11 @@ const createSchedule = async (params) => {
 
   const scheduleId = await scheduleModel.createSchedule(createScheduleParams);
 
-  return scheduleId;
+  let response = status.getStatus("success");
+  response.data = {};
+  response.data.scheduleId = scheduleId;
+
+  return response;
 };
 
 const getSchedules = async (params) => {

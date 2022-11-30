@@ -36,7 +36,7 @@ const getSchedules = async (req, res, next) => {
     ? (scheduleServiceParams.start = new Date(req.body.start))
     : null;
   req.body.end ? (scheduleServiceParams.end = new Date(req.body.end)) : null;
-  req.body.userId ? (scheduleServiceParams.userId = req.body.userId) : null;
+  req.query.userId ? (scheduleServiceParams.userId = req.query.userId) : null;
 
   const schedules = await scheduleService.getSchedules(scheduleServiceParams);
 
