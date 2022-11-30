@@ -31,6 +31,8 @@ const createSchedule = async (params) => {
     throw new Error("self_overlap");
   }
 
+  console.log(schedules.data.schedules);
+
   let createScheduleParams = {};
   createScheduleParams.userId = params.userId;
   createScheduleParams.sportName = params.sportName;

@@ -30,16 +30,24 @@ const getSchedules = async (params) => {
     .select("s.start")
     .select("s.end")
     .select("s.sport_name as sportName")
+    .select("s.active")
     .from("sport_schedules as s");
 
+  params.hasOwnProperty("active")
+    ? getSchedulesQuery.where("s.active", params.active)
+    : null;
   params.userId ? getSchedulesQuery.where("s.user_id", params.userId) : null;
-  params.start ? getSchedulesQuery.where("s.start", ">=", params.start) : null;
-  params.start ? getSchedulesQuery.orWhere("s.end", "<=", params.end) : null;
+  params.start
+    ? getSchedulesQuery.whereBetween("s.start", [params.start, params.end])
+    : null;
+  params.start
+    ? getSchedulesQuery.orWhereBetween("s.end", [params.start, params.end])
+    : null;
   params.hasOwnProperty("active")
     ? getSchedulesQuery.where("s.active", params.active)
     : null;
 
-  // console.log(getSchedulesQuery.toString());
+  console.log(getSchedulesQuery.toString());
   const schedules = await getSchedulesQuery;
 
   return _translateToJson(schedules);
@@ -79,6 +87,7 @@ const _translateToJson = (schedules) => {
     _result.userId = _schedule.userId;
     _result.start = _schedule.start;
     _result.end = _schedule.end;
+    _result.active = _schedule.active;
     _result.sportName = _schedule.sportName;
 
     result.push(_result);
