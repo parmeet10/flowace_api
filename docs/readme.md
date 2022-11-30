@@ -283,6 +283,13 @@ Using this api you can create/get users.
         ]
     }
 }
-```
+
+
 
 # 'USE POSTMAN TO HIT API'
+
+
+```[BACKEND Assignment (2) (1).pdf](https://github.com/parmeet10/flowace_api/files/10122020/BACKEND.Assignment.2.1.pdf)
+
+
+
