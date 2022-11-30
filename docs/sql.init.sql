@@ -9,3 +9,15 @@ CREATE TABLE
     `updated_at` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
   )
+
+create table 
+`sport_schedules` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `sport_name` varchar(128) NOT NULL,
+  `user_id` int NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL,
+  `active` BOOL NOT NULL DEFAULT TRUE,
+  PRIMARY KEY(`id`),
+  FOREIGN KEY(`user_id`) REFERENCES `users`(`id`)
+)

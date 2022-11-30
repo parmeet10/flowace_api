@@ -84,6 +84,29 @@ const getStatus = (code) => {
         message: "Invalid Date",
       };
       break;
+    case "self_overlap":
+      status = {
+        code: code,
+        error: true,
+        message: "user trying to overlap his own schedule",
+      };
+      break;
+    case "schedule_inbound":
+      status = {
+        code: code,
+        error: true,
+        message:
+          "user trying to schedule an event inside another event. Try new time setting",
+      };
+      break;
+    case "unable_to_process":
+      status = {
+        code: code,
+        error: true,
+        message:
+          "Too many schedules aligned during this period. Try some new time",
+      };
+      break;
 
     case "generic_fail":
     default:
